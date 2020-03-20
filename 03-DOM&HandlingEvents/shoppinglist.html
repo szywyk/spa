@@ -4,13 +4,30 @@
 <head>
     <title>Shopping List</title>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        
+         $(document).ready(function(){
+            
+            $("ol").on("dblclick", "li", function(){
+                $(this).remove()
+            })
+
+            $("button").click(function(){
+                $("ol").append($("<li></li>").text($("#item").val()))
+            })
+        
+        })
+
+       
+    </script>
 </head>
 
 <body>
     <h1>Shopping List</h1>
     <p>
-        New item: <input type="text" name="item">
-        <button type="button" onclick=addProduct()>Add</button>
+        New item: <input type="text" name="item" id="item">
+        <button type="button">Add</button>
     </p>
     <h3>List of items</h3>
     <ol>
@@ -19,13 +36,7 @@
         <li>bread</li>
     </ol>
 
-    <script>
-    	function addProduct() {
-            let product = document.createElement("li")
-            product.innerHTML = document.getElementsByName("item")[0].value
-            document.getElementsByTagName("ol")[0].appendChild(product)
-        }
-    </script>
+    
 </body>
 
 </html>
