@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Current exchange rates</title>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	</head>
+	<body>
+        <h1>Current exchange rates</h1>
+        <p id=EUR></p>
+        <p id=USD></p>
+        <p id=GBP></p>
+
+        <script>
+            $(document).ready(function(){
+                for(let i=0; i<$("p").length; i++){
+                    connect($("p")[i].id)
+                }
+            })
+
+            function connect(currency) {
+                let method = 'GET'
+			    let URL = 'http://api.nbp.pl/api/exchangerates/rates/a/' + currency + '?format=json'
+			    let xhr = new XMLHttpRequest()
+		    	xhr.onreadystatechange = function(){display(this, currency)}
+			    xhr.open(method, URL)
+			    xhr.send()
+            }
+            function display(r, currency) {
+                if(r.readyState==4 && r.status==200) {
+                    let str = r.responseText
+                    let obj = JSON.parse(str)
+                    $('#' + currency).text(`${obj.currency} (${obj.code}): ${obj.rates[0].mid}`)
+                }
+			}
+        </script>
+    </body>
+</html>
