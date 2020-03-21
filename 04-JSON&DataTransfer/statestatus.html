@@ -22,7 +22,11 @@
 				console.log("Request state:", r.readyState);
 				console.log("Status:", r.status);
 				console.log("Status text:", r.statusText);
-				console.log("-----");
+                console.log("-----");
+                
+                if(r.readyState==4 && r.status==200) {
+                    console.log(r.responseText)
+                }
 			};
 		</script>
 
