@@ -2,16 +2,33 @@
 <html>
 	<head>
 		<title>Student</title>
-		<meta charset="UTF-8">
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	</head>
 	<body>
 		<h1>Student</h1>
 		<p>Open a console and then click the button</p>
-		<input type="button" value="Display student's data">
+		<input type="button" value="Display student's data" id="button">
 		<p id="personalData"></p>
 
 		<script>
-
+            $(document).ready(function(){
+                $("#button").click(function(){
+                    var method = 'GET'
+				    var URL = 'name.json'
+				    var xhr = new XMLHttpRequest()
+			    	xhr.onreadystatechange = function(){display(this)}
+				    xhr.open(method, URL)
+				    xhr.send()
+                })
+                function display(r){
+                    if(r.readyState==4 && r.status==200) {
+                        let str = r.responseText
+                        let obj = JSON.parse(str)
+                        $("#personalData").text(`${obj.name} ${obj.surname}`)
+                    }
+			    }
+            })
 		</script>
 
 	</body>
