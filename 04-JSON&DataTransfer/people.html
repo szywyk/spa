@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>List of data</title>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<h1>List of data</h1>
+		<p>Click the button to display data</p>
+		<input type="button" value="Display data" id="button">
+		<p id="data"></p>
+
+		<script>
+            $(document).ready(function(){
+                $("#button").click(function(){
+                    var method = 'GET'
+				    var URL = 'people.json'
+				    var xhr = new XMLHttpRequest()
+			    	xhr.onreadystatechange = function(){display(this)}
+				    xhr.open(method, URL)
+				    xhr.send()
+                })
+                function display(r){
+                    if(r.readyState==4 && r.status==200) {
+                        let people = JSON.parse(r.responseText)
+                        for(let i=0; i<people.length; i++){
+                            $("#data").append(`<br>${people[i].name} ${people[i].surname.toUpperCase()}, ${people[i].country}`)
+                        }
+                    }
+			    }
+            })
+		</script>
+
+	</body>
+</html>
