@@ -4,7 +4,19 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-  <h1>Grades</h1>    
+    <h1>Grades</h1>    
+    <strong>Receipt<br>------------------------</strong>
+    <div id="app">
+        Product: {{ product.name }}<br>
+        Unit Price: {{ product.unitPrice }} zł<br>
+        Quantity: {{ product.quantity }}<br>
+        Amount: {{ product.unitPrice * product.quantity }} zł<br>
+        VAT Tax Rate: {{ product.VAT }}%<br>
+        <strong>==============<br>
+            Total: {{ total() }} zł
+        </strong><br>
+
+    </div>
 
   <script>
     var app = new Vue({
@@ -12,9 +24,16 @@
       data: {
         product: {
           name: 'book',
-          unitPrice: 17.5,
+          unitPrice: 17,
           quantity: 3,
           VAT: 23
+        }
+      },
+      methods: {
+        total: function() {
+            amount = this.product.quantity * this.product.unitPrice
+            total = amount + amount * this.product.VAT * 0.01
+            return total.toFixed(2)
         }
       }
     });
