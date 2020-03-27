@@ -4,6 +4,14 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+    <div id="app" style="border: 1px solid black; position: absolute; top: 15%; left: 50%; margin-right: -50%; 
+                        transform: translate(-50%, -50%); padding: 20px 75px; text-align: center;">
+        <b>{{ company.toUpperCase() }}</b><br>
+        {{ address }}<br>
+        {{ postcode }} {{ city }}<br>
+        tel. {{ landline }}, {{ mobile }}<br>
+        <a v-bind:href="web">{{ web }}</a>
+    </div>
   <script>
     var app = new Vue({
       el: '#app',
