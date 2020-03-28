@@ -2,12 +2,26 @@
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      p {margin: 1px;}
+      h3 {margin-bottom: 1px;}
+    </style>
 </head>
 <body>
+    <div id="app">
+        <h3>EMPLOYEE RECORD</h3>
+        <p>Name 1: {{ name1 }}</p>
+        <p v-if="name2">Name 2: {{ name2 }}</p>
+        <p>Surname: {{ surname }}</p>
+        <p v-if="foreigner">{{ nationality }}</p>
+        <p v-else>Pesel: {{ pesel }}</p>
+        <p>Address: {{ address }}</p>
+    </div>
   <script>
     var app = new Vue({
       el: '#app',
       data: {
+        
         name1: 'Adam',
         name2: 'Jan',
         surname: 'Majewski',
@@ -15,6 +29,14 @@
         nationality: 'Polish',
         pesel: '92021708229',
         address: 'ul. Szeroka 3, Kraków',
+        /*
+        name1: 'John',
+        surname: 'Brown',
+        foreigner: true,
+        nationality: 'USA',
+        address: 'Holland Drive 4, Chicago',
+        */
+      }
     });
   </script>
 
