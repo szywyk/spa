@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <span>Student's grades:</span>
+            <span v-for="grade in grades">
+                {{ grade }}
+            </span>
+        </div>
+        <div>
+            Average grade: {{ average }}
+        </div>
+    </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        grades: [4, 5, 3, 2, 3, 5, 5, 2, 4]
+      },
+      computed: {
+          average: function() {
+              return (this.grades.reduce((total, num) => total + num, 0) / this.grades.length).toFixed(2)
+          }
+      }
+    });
+  </script>
+
+</body>
+</html>
