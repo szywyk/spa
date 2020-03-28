@@ -2,8 +2,34 @@
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        table {
+            border-collapse: collapse; text-align: left; margin-left: auto; margin-right: auto;
+        }
+        td, th {
+            border: 1px solid black; width: 200px;
+        }
+    </style>
 </head>
 <body>
+    <table id="app">
+        <thead>
+            <tr>
+                <th v-for="(value, key) in films[0]">
+                    {{ key.charAt(0).toUpperCase() + key.substring(1) }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="film in films">
+               <td v-for="(item, key) in film" v-if="key === 'budget'">
+                    ${{ item }}
+               </td>
+               <td v-else>{{ item }}</td>
+            </tr>
+        </tbody>
+    </table>
+
   <script>
     var app = new Vue({
       el: '#app',
@@ -34,7 +60,6 @@
             budget: 6000000
           }
         ] 
-        }
       }
     });
   </script>
