@@ -2,36 +2,98 @@
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
-  <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        films: [
-          {
-            language: 'Python',
-            popularity: 25.95
-          },
-          {
-            language: 'Java',
-            popularity: 21.42
-          },
-          {
-            language: 'JavaScript',
-            popularity: 8.26
-          },
-          {
-            language: 'C#',
-            popularity: 7.62
-          },
-          {
-            language: 'Php',
-            popularity: 7.37
-          }
-        ] 
-      }
-    });
-  </script>
+    
+        <div id="app">
+            <canvas id="myChart"></canvas>
+        </div>
+    
+
+    <script>
+        
+        var app = new Vue({
+        el: '#app',
+        data: {
+            languages: [
+              {
+                language: 'Python',
+                popularity: 25.95
+              },
+              {
+                language: 'Java',
+                popularity: 21.42
+              },
+              {
+                language: 'JavaScript',
+                popularity: 8.26
+              },
+              {
+                language: 'C#',
+                popularity: 7.62
+              },
+              {
+                language: 'Php',
+                popularity: 7.37
+              }
+            ]
+        },
+        methods: {
+            createChart(chartId, chartData) {
+                const ctx = document.getElementById(chartId);
+                const myChart = new Chart(ctx, {
+                    type: chartData.type,
+                    data: chartData.data,
+                    options: chartData.options,
+                });
+            }
+        },
+        computed: {
+            chartData: function() {
+                let langs = []
+                let pops = []
+                for(let i=0; i<this.languages.length; i++){
+                    langs.push(this.languages[i].language)
+                    pops.push(this.languages[i].popularity)
+                }
+
+                let data = {
+                    type: 'bar',
+                    data: {
+                        labels: langs,
+                        datasets: [{
+                            label: 'popularity in %',
+                            data: pops,
+                            backgroundColor: 'green',
+                            borderWidth: 6,
+                            hoverBorderColor: 'grey',
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Most popular programming languages',
+                            fontSize: 30
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                }
+                return data
+            }
+        },
+        mounted() {
+            this.createChart('myChart', this.chartData);
+        }
+        });
+
+    </script>
+
 </body>
 </html>
