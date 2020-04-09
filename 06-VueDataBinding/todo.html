@@ -8,12 +8,10 @@
     <h1>TO DO APP</h1>
     <span>To do: </span>
     <input type="text" v-model="todo">
-    <button type="button" @click="add()">Add</button>
+    <button type="button" @click="add">Add</button>
     <h3>To Do List</h3>
     <ol>
-      <li>...</li>
-      <li>...</li>
-      <li>...</li>
+        <li v-for="(item, index) in todos" @dblclick="undo(index)">{{ item }}</li>
     </ol>
   </div>
   <script>
@@ -25,7 +23,10 @@
       },
       methods: {
         add: function() {
-          this.todos.push(this.todo);
+          this.todos.push(this.todo)
+        },
+        undo: function(index) {
+            this.$delete(this.todos, index)
         }
       }
     });

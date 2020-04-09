@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="checkbox" id="dt" value="dt" v-model="courses">
+        <label for="dt">Design Thinking</label>
+        <input type="checkbox" id="psych" value="psych" v-model="courses">
+        <label for="psych">Psychologia</label>
+        <input type="checkbox" id="socjo" value="socjo" v-model="courses">
+        <label for="socjo">Socjologia</label>
+        <input type="checkbox" id="pedag" value="padag" v-model="courses">
+        <label for="pedag">Pedagogika</label>
+        <input type="checkbox" id="spa" value="spa" v-model="courses">
+        <label for="spa">Programowanie SPA</label>
+        <p>Liczba wybranych przedmiotów: {{ number }}</p>
+    </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        courses: []
+      },
+      computed: {
+          number: function() {
+              return this.courses.length
+          }
+      }
+    });
+  </script>
+
+</body>
+</html>

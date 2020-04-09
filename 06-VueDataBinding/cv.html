@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="jumbotron text-center">
+            <h1>Formularz wprowadzania CV</h1> 
+          </div>
+        <form>
+            <div class="form-group">
+                <label for="name">Imie:</label>
+                <input type="text" class="form-control" id="name" placeholder="Wpisz imię" name="name" v-model="name">
+              </div>
+              <div class="form-group">
+                  <label for="surname">Nazwisko:</label>
+                  <input type="text" class="form-control" id="surname" placeholder="Wpisz nazwisko" name="surname" v-model="surname">
+                </div>
+            <div class="form-group">
+              <label for="age">Wiek:</label>
+              <input type="number" class="form-control" id="age" placeholder="Wpisz wiek" name="age" v-model="age">
+            </div>
+            <div class="form-group"> 
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="woman" name="gender" value="Kobieta" v-model="gender">
+                    <label class="form-check-label" for="woman">Kobieta</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="man" name="gender" value="Mężczyzna" v-model="gender">
+                    <label class="form-check-label" for="man">Mężczyzna</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="education">Wykształcenie:</label>
+                <select class="form-control" id="education" v-model="education">
+                  <option disabled value="">Wybierz:</option>
+                  <option>brak</option>
+                  <option>podstawowe</option>
+                  <option>średnie</option>
+                  <option>wyższe</option>
+                </select>
+              </div>
+            <div class="form-group">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="komp" value="obsluga komputera" v-model="skills">
+                    <label class="form-check-label" for="komp">obsługa komputera</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="prawko" value="prawo jazdy" v-model="skills">
+                    <label class="form-check-label" for="prawko">prawo jazdy</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="kreat" value="kreatywnosc" v-model="skills">
+                    <label class="form-check-label" for="kreat">kreatywność</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="zesp" value="praca w zespole" v-model="skills">
+                    <label class="form-check-label" for="zesp">praca w zespole</label>
+                </div>
+            </div>
+        </form>
+        <button class="btn btn-primary" @click="addToLocalStorage">Zapisz</button>
+        <button class="btn btn-primary" @click="read">Czytaj</button>
+    </div>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        name: '',
+        surname: '',
+        age: 0,
+        gender: '',
+        education: '',
+        skills: []
+      },
+      methods: {
+          addToLocalStorage: function() {
+              localStorage.setItem('name', JSON.stringify(this.name))
+              localStorage.setItem('surname', JSON.stringify(this.surname))
+              localStorage.setItem('age', JSON.stringify(this.age))
+              localStorage.setItem('gender', JSON.stringify(this.gender))
+              localStorage.setItem('education', JSON.stringify(this.education))
+              localStorage.setItem('skills', JSON.stringify(this.skills))
+              console.log("Dane zostały zapisane w local storage")
+          },
+          read: function() {
+              this.name = JSON.parse(localStorage.getItem('name'))
+              this.surname = JSON.parse(localStorage.getItem('surname'))
+              this.age = JSON.parse(localStorage.getItem('age'))
+              this.gender = JSON.parse(localStorage.getItem('gender'))
+              this.education = JSON.parse(localStorage.getItem('education'))
+              this.skills = JSON.parse(localStorage.getItem('skills'))  
+          }
+      }
+    });
+  </script>
+
+</body>
+</html>
