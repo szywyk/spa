@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id='app'>
+            <h2>My favourite films</h2>
+            <display-film :title="films[0].title" :director="films[0].director" :year="films[0].year"></display-film>
+            <display-film :title="films[1].title" :director="films[1].director" :year="films[1].year"></display-film>
+            <display-film :title="films[2].title" :director="films[2].director" :year="films[2].year"></display-film>
+        </div>
+
+            <script type='text/x-template' id='film-template'>
+                <p>"{{ title }}" - {{ director }}, {{ year }}</p>
+            </script>
+
+        <script>
+            Vue.component ('display-film', {
+                template: '#film-template',
+                props: ['title', 'director', 'year']
+            })
+
+            new Vue ({
+                el: '#app',
+                data: {
+                    films: [
+                        {title: 'Parasite', director: 'Joon-ho Bong', year: '2019'},
+                        {title: 'The Gentlemen', director: 'Guy Ritchie', year: '2019'},
+                        {title: 'Intouchables', director: 'Oliver Nakache', year: '2011'}
+                    ]
+                }
+            })
+        </script>
+    </body>
+</html>

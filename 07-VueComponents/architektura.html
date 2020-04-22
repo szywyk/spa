@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id='app'>
+            <h2>Elementy architektury von Neumanna:</h2>
+            <display-film></display-film>
+        </div>
+
+            <script type='text/x-template' id='film-template'>
+                <div>
+                    <ul v-for="el in els">
+                        <li>{{ el }}</li>
+                    </ul>
+                </div>
+            </script>
+
+        <script>
+            Vue.component ('display-film', {
+                template: '#film-template',
+                data() {
+                    return {
+                        els: ["pamięć komputerowa", "jednostka sterująca", "jednostka arytmetyczno-logiczna", "urządzenia I/O"]
+                    }
+                }
+            })
+
+            new Vue ({
+                el: '#app'
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <my-counter></my-counter>
+        <my-counter></my-counter>
+    </div>
+
+    <script type='text/x-template' id='counter-temp'>
+        <div>
+            <p>{{ value }}</p>
+            <button @click="add">Dodaj</button>
+            <button @click="substract">Odejmij</button>
+        </div>
+    </script>
+
+    <script>
+        Vue.component ('my-counter', {
+            template: '#counter-temp',
+            data() {
+                return {
+                    value: 0
+                }
+            },
+            methods: {
+                add: function() {
+                    return this.value++
+                },
+                substract: function() {
+                    return this.value--
+                }
+            }
+        })
+
+        new Vue ({
+            el: '#app',
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+<body>
+    <div id='app'>
+        <my-chart :labelsprop="labels" :datasetprop="dataset" :labelprop="label"></my-chart>
+    </div>
+
+    <script type='text/x-template' id='chart-temp'>
+            <canvas id="myChart"></canvas>
+    </script>
+
+    <script>
+        Vue.component ('my-chart', {
+            template: '#chart-temp',
+            props: ['labelsprop', 'datasetprop', 'labelprop'],
+            data() {
+                return {
+                    dataset: {
+                        type: 'bar',
+                        data: {
+                            labels: [],
+                            datasets: [{
+                                label: '',
+                                data: [],
+                                backgroundColor: 'green',
+                                borderWidth: 6,
+                                hoverBorderColor: 'grey',
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: 'Most popular programming languages',
+                                fontSize: 30
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }            
+                    }
+                }
+            },
+            methods: {
+                createChart(chartId, chartData) {
+                    const ctx = document.getElementById(chartId);
+                    const myChart = new Chart(ctx, {
+                        type: chartData.type,
+                        data: chartData.data,
+                        options: chartData.options,
+                    });
+                },
+                setData() {
+                    this.dataset.data.labels = this.labelsprop  
+                    this.dataset.data.datasets[0].label = this.labelprop
+                    this.dataset.data.datasets[0].data = this.datasetprop
+                }
+            },
+            mounted() {        
+                this.setData()                                       
+                this.createChart('myChart', this.dataset);
+            }
+        })
+
+        new Vue ({
+            el: '#app',
+            data: {
+                dataset: [25.95, 21.42, 8.26, 7.62, 7.37],
+                label: 'popularity in %',
+                labels: ['Python', 'Java', 'JavaScript', 'C#', 'Php']
+            }
+        })
+    </script>
+</body>
+</html>

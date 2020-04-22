@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <to-binary v-for="num in nums" :decim="num"></to-binary>
+    </div>
+
+    <script type='text/x-template' id='binary-temp'>
+        <div>
+            <p>{{ decim }}(10) = {{ toBinary }}(2)</p>
+        </div>
+    </script>
+
+    <script>
+        Vue.component ('to-binary', {
+            template: '#binary-temp',
+            props: ["decim"],
+            computed: {
+                toBinary: function() {
+                    return new Number(this.decim).toString(2)
+                }
+            }
+        })
+
+        new Vue ({
+            el: '#app',
+            data: {
+                nums: [8, 170, 204, 3855]
+            }
+        })
+    </script>
+</body>
+</html>

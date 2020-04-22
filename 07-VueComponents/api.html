@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <api-getter></api-getter>
+    </div>
+
+    <script type='text/x-template' id='api-template'>
+        <div>
+            <img :src="cat" alt="Random cat's pic"  style="width:500px; height:600px;">
+        </div>
+    </script>
+
+    <script>
+        Vue.component ('api-getter', {
+            template: '#api-template',
+            data() {
+                return {
+                    cat: null
+                }
+            },
+            methods: {
+                
+            },
+            mounted() {
+            axios
+                .get('https://aws.random.cat/meow')
+                .then(response => this.cat = response.data.file)
+            },
+        })
+
+        new Vue ({
+            el: '#app',
+        })
+    </script>
+</body>
+</html>
